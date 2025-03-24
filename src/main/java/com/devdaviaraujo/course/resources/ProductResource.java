@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.devdaviaraujo.course.entities.Product;
+import com.devdaviaraujo.course.entities.pk.OrderItemPK;
 import com.devdaviaraujo.course.services.ProductService;
 
 @RestController
@@ -18,7 +19,7 @@ public class ProductResource {
 	
 	@Autowired
 	private ProductService service;
-			
+	
 	@GetMapping
 	public ResponseEntity<List<Product>> findAll(){
 		List<Product> list = service.findAll();
