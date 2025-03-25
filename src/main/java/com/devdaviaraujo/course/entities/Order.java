@@ -20,6 +20,8 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
+/*Classe que representa uma Ordem de compra, onde podem estar relacionados vários Products/OrderItems,
+   além do Payment e OrderStatus para acompanhar o estado do pedido*/
 @Entity
 @Table(name = "tb_order")
 public class Order implements Serializable {
@@ -35,13 +37,16 @@ public class Order implements Serializable {
 	
 	private Integer orderStatus;
 	
+	//mapeamento com a classe User
 	@ManyToOne
 	@JoinColumn(name = "client_id")
 	private User client;
 	
+	//mapeamento com a classe OrderItem
 	@OneToMany(mappedBy = "id.order")
 	private Set<OrderItem> items = new HashSet<>(); 
 	
+    //mapeamento com a classe payment
 	@OneToOne(mappedBy = "order", cascade = CascadeType.ALL)
 	private Payment payment;
 	
@@ -120,6 +125,9 @@ public class Order implements Serializable {
 		return Objects.equals(id, other.id);
 	}
 	
+	
+	/*Método que calcula o valor total de uma ordem através da soma dos 
+	  subtotais de todos os OrderItems associados à Order*/
 	public Double getTotal() {
 		Double sum = 0.0;
 		for(OrderItem o : items) {

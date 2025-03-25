@@ -9,16 +9,21 @@ import org.springframework.stereotype.Service;
 import com.devdaviaraujo.course.entities.User;
 import com.devdaviaraujo.course.repositories.UserRepository;
 
+/*Classe referente à User responsável por processar as requisições 
+  recebidas em resources e acessar o Banco através do repository*/
 @Service
 public class UserService {
 	
+	//Instanciando um repositório para acessar dados
 	@Autowired
 	private UserRepository repository;
 	
+	//Método que retorna todos os usuários no repositório
 	public List<User> findAll(){
 		return repository.findAll();
 	}
 	
+	//Método que retorna um usuário específico no repositório através do id
 	public User findById(Long id) {
 		Optional<User> obj = repository.findById(id);
 		return obj.get();

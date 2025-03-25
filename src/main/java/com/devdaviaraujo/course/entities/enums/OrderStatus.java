@@ -1,5 +1,6 @@
 package com.devdaviaraujo.course.entities.enums;
 
+//Representa o estado de um pedido na classe Order em relação as etapas existentes entre o pagamento e a entrega
 public enum OrderStatus {
 	
 	 WAITING_PAYMENT(1),

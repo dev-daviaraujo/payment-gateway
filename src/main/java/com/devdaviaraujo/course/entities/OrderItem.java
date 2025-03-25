@@ -10,12 +10,15 @@ import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 
+//Classe extra que surge para resolver a associação "Muitos pra muitos" entre Product e Order
 @Entity
 @Table(name = "tb_order_item")
 public class OrderItem implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 	
+	/*Referência à chave primária de OrderItem que pode ser obtida através da associação de duas chaves estrangeiras,
+	  no caso, o id do Product e o id da Order*/
 	@EmbeddedId
 	private OrderItemPK id = new OrderItemPK();
 	
@@ -83,6 +86,7 @@ public class OrderItem implements Serializable{
 		return Objects.equals(id, other.id);
 	}
 	
+	//Método que calcula o valor parcial apenas de um produto da OrderItem
 	public Double getSubTotal() {
 		return price*quantity;
 	}

@@ -14,6 +14,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 
+//Classe que representa a categoria dos produtos
 @Entity
 @Table(name = "tb_category")
 public class Category implements Serializable{
@@ -25,6 +26,7 @@ public class Category implements Serializable{
 	private Long id;
 	private String name;
 	
+	//mapeamento da associação entre a classe Category e Product
 	@JsonIgnore
 	@ManyToMany(mappedBy = "categories")	
 	private Set<Product> products = new HashSet<>();

@@ -14,6 +14,7 @@ import jakarta.persistence.MapsId;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
+//Classe que representa um pagamento e deve ser associada à uma Order existente
 @Entity
 @Table(name = "tb_payment")
 public class Payment implements Serializable {
@@ -25,6 +26,7 @@ public class Payment implements Serializable {
 	private Long id;
 	private Instant moment;
 	
+	//Mapeamento com a classe Order
 	@JsonIgnore
 	@OneToOne
 	@MapsId

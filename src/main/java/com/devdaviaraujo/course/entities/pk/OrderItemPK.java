@@ -10,15 +10,19 @@ import jakarta.persistence.Embeddable;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 
+/*Classe que associa as chaves primárias de Product e Order para gerar uma chave primária em OrderItem,
+  que é a tabela que resolve o problema da associação "Muitos pra muitos" entre Product e Order*/
 @Embeddable
 public class OrderItemPK implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	
+	//Mapeamento com a classe Order
 	@ManyToOne
 	@JoinColumn(name = "order_id")
 	private Order order;
 	
+	//Mapeamento com a classe Product
 	@ManyToOne
 	@JoinColumn(name = "product_id")
 	private Product product;

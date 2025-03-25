@@ -17,6 +17,7 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
+//Classe que representa os produtos existentes no banco de dados
 @Entity
 @Table(name = "tb_product")
 public class Product implements Serializable {
@@ -31,9 +32,11 @@ public class Product implements Serializable {
 	private Double price;
 	private String imgUrl;
 	
+	//Mapeamento com a classe OrderItem
 	@OneToMany(mappedBy = "id.product")
 	private Set<OrderItem> orderItems = new HashSet<>();
 
+	//Mapeamento com a classe Category
 	@ManyToMany
 	@JoinTable(name = "tb_product_category", joinColumns = @JoinColumn(name = "product_id"), inverseJoinColumns = @JoinColumn(name = "category_id"))
 	private Set<Category> categories = new HashSet<>();

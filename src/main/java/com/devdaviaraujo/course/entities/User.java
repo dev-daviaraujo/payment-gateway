@@ -14,6 +14,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
+//Classe que representa um usuário "Comprador" da loja e deve ser associada à uma ordem de compra
 @Entity
 @Table(name = "tb_user")
 public class User implements Serializable {
@@ -28,6 +29,7 @@ public class User implements Serializable {
 	private String phone;
 	private String password;
 	
+	//Mapeamento com a classe Order
 	@JsonIgnore
 	@OneToMany(mappedBy = "client")
 	private List<Order> orders = new ArrayList<>();
