@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.devdaviaraujo.course.entities.User;
 import com.devdaviaraujo.course.repositories.UserRepository;
+import com.devdaviaraujo.course.services.exceptions.ResourceNotFoundException;
 
 /*Classe referente à User responsável por processar as requisições 
   recebidas em resources e acessar o Banco através do repository*/
@@ -26,7 +27,14 @@ public class UserService {
 	//Método que retorna um usuário específico no repositório através do id
 	public User findById(Long id) {
 		Optional<User> obj = repository.findById(id);
-		return obj.get();
+		return obj.orElseThrow(() -> new ResourceNotFoundException(id));
+		/*try {
+			Optional<User> obj = repository.findById(id);
+			return obj.get();
+		}
+		catch(ResourceNotFoundException e) {
+			throw new ResourceNotFoundException(id);
+		}*/
 	}
 	
 	public User insert(User obj) {
