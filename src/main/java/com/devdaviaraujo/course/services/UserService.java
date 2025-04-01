@@ -13,6 +13,8 @@ import com.devdaviaraujo.course.repositories.UserRepository;
 import com.devdaviaraujo.course.services.exceptions.DatabaseException;
 import com.devdaviaraujo.course.services.exceptions.ResourceNotFoundException;
 
+import jakarta.persistence.EntityNotFoundException;
+
 /*Classe referente à User responsável por processar as requisições 
   recebidas em resources e acessar o Banco através do repository*/
 @Service
@@ -49,9 +51,13 @@ public class UserService {
 	}
 
 	public User update(Long id, User obj) {
-		User entity =  repository.getReferenceById(id);
-		updateData(entity, obj);
-		return repository.save(entity);
+		try {
+			User entity =  repository.getReferenceById(id);
+			updateData(entity, obj);
+			return repository.save(entity);			
+		} catch(EntityNotFoundException e) {
+			throw new ResourceNotFoundException(id);			
+		}
 	}
 
 	private void updateData(User entity, User obj) {
